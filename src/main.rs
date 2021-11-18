@@ -74,7 +74,7 @@ async fn main() -> Result<(), Error> {
     );
 
     warp::serve(healthcheck::healthcheck_filter())
-        .run(([0, 0, 0, 0], 8080))
+        .run(([0, 0, 0, 0], 3030))
         .await;
 
     Ok(())
