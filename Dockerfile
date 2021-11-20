@@ -15,7 +15,7 @@ RUN apt-get update && apt-get install -y cmake && rm -rf /var/lib/apt/lists/*
 RUN cargo chef cook --release --recipe-path recipe.json
 # Build application
 COPY . .
-RUN cargo build --release --bin rust-webapp
+RUN cargo build --release
 
 # We do not need the Rust toolchain to run the binary!
 FROM debian:buster-slim AS runtime
