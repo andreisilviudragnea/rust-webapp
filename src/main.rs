@@ -1,10 +1,11 @@
 use std::time::Duration;
 
-use clap::{value_t, App, Arg};
+use clap::{App, Arg, value_t};
 use kube::Error;
-use log::LevelFilter;
+use log::{info, LevelFilter};
 use simple_logger::SimpleLogger;
 
+use crate::kubeclient::{KubeClient, KubeClientImpl};
 use crate::metadata::print_metadata;
 
 mod healthcheck;
@@ -18,11 +19,11 @@ async fn main() -> Result<(), Error> {
         .init()
         .unwrap();
 
-    // let kube_client = KubeClientImpl::new("default").await?;
-    //
-    // let config_map = kube_client.get_config_map("config_map").await?;
-    //
-    // info!("Config map: {:?}", config_map);
+    let kube_client = KubeClientImpl::new("default").await?;
+
+    let config_map = kube_client.get_config_map("config_map").await?;
+
+    info!("Config map: {:?}", config_map);
 
     let matches = App::new("metadata fetch example")
         .version(option_env!("CARGO_PKG_VERSION").unwrap_or(""))
