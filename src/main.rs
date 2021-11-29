@@ -1,16 +1,18 @@
 use std::time::Duration;
 
-use clap::{App, Arg, value_t};
+use clap::{value_t, App, Arg};
 use kube::Error;
 use log::{info, LevelFilter};
 use simple_logger::SimpleLogger;
 
 use crate::kubeclient::{KubeClient, KubeClientImpl};
 use crate::metadata::print_metadata;
+use crate::prost::{create_large_shirt, deserialize_shirt, serialize_shirt};
 
 mod healthcheck;
 mod kubeclient;
 mod metadata;
+mod prost;
 
 #[tokio::main]
 async fn main() -> Result<(), Error> {
@@ -18,6 +20,14 @@ async fn main() -> Result<(), Error> {
         .with_level(LevelFilter::Info)
         .init()
         .unwrap();
+
+    let shirt = create_large_shirt("red".to_string());
+
+    info!("Shirt: {:?}", shirt);
+    info!(
+        "Deserialized shirt: {:?}",
+        deserialize_shirt(&serialize_shirt(&shirt))
+    );
 
     let kube_client = KubeClientImpl::new("default").await?;
 
