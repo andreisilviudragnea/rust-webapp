@@ -12,6 +12,7 @@ use crate::prost::{create_large_shirt, deserialize_shirt, serialize_shirt};
 mod healthcheck;
 mod kubeclient;
 mod metadata;
+mod mockall;
 mod prost;
 
 #[tokio::main]
