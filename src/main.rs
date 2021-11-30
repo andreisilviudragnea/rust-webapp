@@ -7,12 +7,14 @@ use simple_logger::SimpleLogger;
 
 use crate::kubeclient::{KubeClient, KubeClientImpl};
 use crate::metadata::print_metadata;
+use crate::moka::use_moka;
 use crate::prost::{create_large_shirt, deserialize_shirt, serialize_shirt};
 
 mod healthcheck;
 mod kubeclient;
 mod metadata;
 mod mockall;
+mod moka;
 mod prost;
 
 #[tokio::main]
@@ -29,6 +31,8 @@ async fn main() -> Result<(), Error> {
         "Deserialized shirt: {:?}",
         deserialize_shirt(&serialize_shirt(&shirt))
     );
+
+    use_moka().await;
 
     let kube_client = KubeClientImpl::new("default").await?;
 
