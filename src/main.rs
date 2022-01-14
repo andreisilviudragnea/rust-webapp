@@ -1,6 +1,6 @@
 use std::time::Duration;
 
-use clap::{value_t, App, Arg};
+use clap::{App, Arg};
 use kube::Error;
 use log::{info, LevelFilter};
 use simple_logger::SimpleLogger;
@@ -44,32 +44,32 @@ async fn main() -> Result<(), Error> {
         .version(option_env!("CARGO_PKG_VERSION").unwrap_or(""))
         .about("Fetch and print the cluster metadata")
         .arg(
-            Arg::with_name("brokers")
-                .short("b")
+            Arg::new("brokers")
+                .short('b')
                 .long("brokers")
                 .help("Broker list in kafka format")
                 .takes_value(true)
                 .default_value("localhost:9092"),
         )
         .arg(
-            Arg::with_name("offsets")
+            Arg::new("offsets")
                 .long("offsets")
                 .help("Enables offset fetching"),
         )
         .arg(
-            Arg::with_name("topic")
+            Arg::new("topic")
                 .long("topic")
                 .help("Only fetch the metadata of the specified topic")
                 .takes_value(true),
         )
         .arg(
-            Arg::with_name("log-conf")
+            Arg::new("log-conf")
                 .long("log-conf")
                 .help("Configure the logging format (example: 'rdkafka=trace')")
                 .takes_value(true),
         )
         .arg(
-            Arg::with_name("timeout")
+            Arg::new("timeout")
                 .long("timeout")
                 .help("Metadata fetch timeout in milliseconds")
                 .takes_value(true)
@@ -78,7 +78,7 @@ async fn main() -> Result<(), Error> {
         .get_matches();
 
     let brokers = matches.value_of("brokers").unwrap();
-    let timeout = value_t!(matches, "timeout", u64).unwrap();
+    let timeout = matches.value_of_t("timeout").unwrap();
     let topic = matches.value_of("topic");
     let fetch_offsets = matches.is_present("offsets");
 
