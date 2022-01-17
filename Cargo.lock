@@ -74,6 +74,17 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "cdb031dd78e28731d87d56cc8ffef4a8f36ca26c38fe2de700543e627f8a464a"
 
 [[package]]
+name = "backoff"
+version = "0.4.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "b62ddb9cb1ec0a098ad4bbf9344d0713fa193ae1a80af55febcff2627b6a00c1"
+dependencies = [
+ "getrandom",
+ "instant",
+ "rand",
+]
+
+[[package]]
 name = "base64"
 version = "0.13.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -457,9 +468,9 @@ dependencies = [
 
 [[package]]
 name = "fragile"
-version = "1.0.0"
+version = "1.1.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "69a039c3498dc930fe810151a34ba0c1c70b02b8625035592e74432f678591f2"
+checksum = "8da1b8f89c5b5a5b7e59405cfcf0bb9588e5ed19f0b57a4cd542bbba3f164a6d"
 
 [[package]]
 name = "futures"
@@ -853,9 +864,9 @@ dependencies = [
 
 [[package]]
 name = "kube"
-version = "0.65.0"
+version = "0.66.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "9ec231e9ec9e84789f9eb414d1ac40ce6c90d0517fb272a335b4233f2e272b1e"
+checksum = "f4b96944d327b752df4f62f3a31d8694892af06fb585747c0b5e664927823d1a"
 dependencies = [
  "k8s-openapi",
  "kube-client",
@@ -864,9 +875,9 @@ dependencies = [
 
 [[package]]
 name = "kube-client"
-version = "0.65.0"
+version = "0.66.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "95dddb1fcced906d79cdae530ff39079c2d3772b2d623088fdbebe610bfa8217"
+checksum = "232db1af3d3680f9289cf0b4db51b2b9fee22550fc65d25869e39b23e0aaa696"
 dependencies = [
  "base64",
  "bytes",
@@ -885,6 +896,7 @@ dependencies = [
  "openssl",
  "pem",
  "pin-project",
+ "secrecy",
  "serde",
  "serde_json",
  "serde_yaml",
@@ -899,9 +911,9 @@ dependencies = [
 
 [[package]]
 name = "kube-core"
-version = "0.65.0"
+version = "0.66.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "c52b6ab05d160691083430f6f431707a4e05b64903f2ffa0095ee5efde759117"
+checksum = "de491f8c9ee97117e0b47a629753e939c2392d5d0a40f6928e582a5fba328098"
 dependencies = [
  "chrono",
  "form_urlencoded",
@@ -916,10 +928,11 @@ dependencies = [
 
 [[package]]
 name = "kube-runtime"
-version = "0.65.0"
+version = "0.66.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "406280d56304bc79b37af7f78e0d9719a4eebc3f46e5e79663154874b7696a48"
+checksum = "710729592eb30219b4e84898e91dc991fe09ccafe2c17fec4e45c3426c61abe0"
 dependencies = [
+ "backoff",
  "dashmap",
  "derivative",
  "futures",
@@ -1755,10 +1768,20 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "d29ab0c6d3fc0ee92fe66e2d99f700eab17a8d57d1c1d3b748380fb20baa78cd"
 
 [[package]]
-name = "security-framework"
-version = "2.4.2"
+name = "secrecy"
+version = "0.8.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "525bc1abfda2e1998d152c45cf13e696f76d0a4972310b22fac1658b05df7c87"
+checksum = "9bd1c54ea06cfd2f6b63219704de0b9b4f72dcc2b8fdef820be6cd799780e91e"
+dependencies = [
+ "serde",
+ "zeroize",
+]
+
+[[package]]
+name = "security-framework"
+version = "2.5.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "d09d3c15d814eda1d6a836f2f2b56a6abc1446c8a34351cb3180d3db92ffe4ce"
 dependencies = [
  "bitflags",
  "core-foundation",
@@ -1769,9 +1792,9 @@ dependencies = [
 
 [[package]]
 name = "security-framework-sys"
-version = "2.4.2"
+version = "2.5.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "a9dd14d83160b528b7bfd66439110573efcfbe281b17fc2ca9f39f550d619c7e"
+checksum = "e90dd10c41c6bfc633da6e0c659bd25d31e0791e5974ac42970267d59eba87f7"
 dependencies = [
  "core-foundation-sys",
  "libc",
@@ -1828,9 +1851,9 @@ dependencies = [
 
 [[package]]
 name = "serde_json"
-version = "1.0.74"
+version = "1.0.75"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "ee2bb9cd061c5865d345bb02ca49fcef1391741b672b54a0bf7b679badec3142"
+checksum = "c059c05b48c5c0067d4b4b2b4f0732dd65feb52daf7e0ea09cd87e7dadc1af79"
 dependencies = [
  "indexmap",
  "itoa 1.0.1",
@@ -1840,12 +1863,12 @@ dependencies = [
 
 [[package]]
 name = "serde_urlencoded"
-version = "0.7.0"
+version = "0.7.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "edfa57a7f8d9c1d260a549e7224100f6c43d43f9103e06dd8b4095a9b2b43ce9"
+checksum = "d3491c14715ca2294c4d6a88f15e84739788c1d030eed8c110436aafdaa2f3fd"
 dependencies = [
  "form_urlencoded",
- "itoa 0.4.8",
+ "itoa 1.0.1",
  "ryu",
  "serde",
 ]
@@ -2545,3 +2568,9 @@ checksum = "56c1936c4cc7a1c9ab21a1ebb602eb942ba868cbd44a99cb7cdc5892335e1c85"
 dependencies = [
  "linked-hash-map",
 ]
+
+[[package]]
+name = "zeroize"
+version = "1.5.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "cc222aec311c323c717f56060324f32b82da1ce1dd81d9a09aa6a9030bfe08db"
