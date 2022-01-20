@@ -15,7 +15,7 @@ kube = "0.66.0"
 kube-runtime = "0.66.0"
 k8s-openapi = { version = "0.13.1", default-features = false, features = ["v1_22"] }
 log = "0.4.14"
-simple_logger = "2.0.0"
+simple_logger = "2.1.0"
 tokio = { version = "1.15.0", features = ["full"] }
 warp = "0.3.2"
 rdkafka = { version = "0.28.0", features = ["cmake-build", "ssl"] }
