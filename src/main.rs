@@ -1,6 +1,6 @@
 use std::time::Duration;
 
-use clap::{App, Arg};
+use clap::{Arg, Command};
 use kube::Error;
 use log::{info, LevelFilter};
 use simple_logger::SimpleLogger;
@@ -40,7 +40,7 @@ async fn main() -> Result<(), Error> {
 
     info!("Config map: {:?}", config_map);
 
-    let matches = App::new("metadata fetch example")
+    let matches = Command::new("metadata fetch example")
         .version(option_env!("CARGO_PKG_VERSION").unwrap_or(""))
         .about("Fetch and print the cluster metadata")
         .arg(
