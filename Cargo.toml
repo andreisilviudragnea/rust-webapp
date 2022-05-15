@@ -20,7 +20,7 @@ tokio = { version = "1.18.2", features = ["full"] }
 warp = "0.3.2"
 rdkafka = { version = "0.28.0", features = ["cmake-build", "ssl"] }
 prost = "0.10.3"
-moka = { version = "0.8.2", features = ["future"] }
+moka = { version = "0.8.3", features = ["future"] }
 
 [build-dependencies]
 prost-build = "0.10.3"
