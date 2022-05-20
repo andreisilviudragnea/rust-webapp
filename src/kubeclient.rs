@@ -6,8 +6,7 @@ use kube::error::Error;
 use kube::{Api, Client};
 use kube_runtime::reflector::store::Writer;
 use kube_runtime::reflector::Store;
-use kube_runtime::utils::try_flatten_applied;
-use kube_runtime::{reflector, watcher};
+use kube_runtime::{reflector, watcher, WatchStreamExt};
 use log::info;
 use tokio::task;
 
@@ -61,7 +60,7 @@ impl KubeClient for KubeClientImpl {
         let label_selector_clone = label_selector.clone();
 
         task::spawn(async move {
-            try_flatten_applied(reflector(
+            reflector(
                 writer,
                 watcher(
                     config_maps_api,
@@ -70,7 +69,8 @@ impl KubeClient for KubeClientImpl {
                         ..ListParams::default()
                     },
                 ),
-            ))
+            )
+            .applied_objects()
             .try_for_each(|config_map| async {
                 callback(config_map);
                 Ok(())
