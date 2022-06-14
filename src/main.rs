@@ -77,15 +77,15 @@ async fn main() -> Result<(), Error> {
         )
         .get_matches();
 
-    let brokers = matches.value_of("brokers").unwrap();
-    let timeout = matches.value_of_t("timeout").unwrap();
-    let topic = matches.value_of("topic");
-    let fetch_offsets = matches.is_present("offsets");
+    let brokers = matches.get_one::<String>("brokers").unwrap();
+    let timeout = matches.get_one::<u64>("timeout").unwrap();
+    let topic = matches.get_one::<String>("topic").map(|it| it.as_str());
+    let fetch_offsets = matches.contains_id("offsets");
 
     print_metadata(
         brokers,
         topic,
-        Duration::from_millis(timeout),
+        Duration::from_millis(*timeout),
         fetch_offsets,
     );
 
