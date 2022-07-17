@@ -3,5 +3,11 @@
     "config:base",
     ":automergeAll",
     ":automergeBranch"
+  ],
+  "packageRules": [
+    {
+      "groupName": "kube",
+      "matchPackageNames": ["kube", "kube-runtime"]
+    }
   ]
 }
