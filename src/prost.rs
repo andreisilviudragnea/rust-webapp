@@ -4,6 +4,7 @@ use prost::Message;
 
 // Include the `items` module, which is generated from items.proto.
 pub mod items {
+    #![allow(clippy::derive_partial_eq_without_eq)]
     include!(concat!(env!("OUT_DIR"), "/snazzy.items.rs"));
 }
 
