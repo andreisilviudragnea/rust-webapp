@@ -8,7 +8,7 @@ edition = "2021"
 [dependencies]
 async-trait = "0.1.57"
 chrono = "0.4.22"
-clap = "3.2.22"
+clap = "4.0.10"
 env_logger = "0.9.1"
 futures = "0.3.24"
 kube = "0.75.0"
