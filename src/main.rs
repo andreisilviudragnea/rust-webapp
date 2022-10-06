@@ -48,7 +48,7 @@ async fn main() -> Result<(), Error> {
                 .short('b')
                 .long("brokers")
                 .help("Broker list in kafka format")
-                .takes_value(true)
+                .num_args(1)
                 .default_value("localhost:9092"),
         )
         .arg(
@@ -60,19 +60,19 @@ async fn main() -> Result<(), Error> {
             Arg::new("topic")
                 .long("topic")
                 .help("Only fetch the metadata of the specified topic")
-                .takes_value(true),
+                .num_args(1),
         )
         .arg(
             Arg::new("log-conf")
                 .long("log-conf")
                 .help("Configure the logging format (example: 'rdkafka=trace')")
-                .takes_value(true),
+                .num_args(1),
         )
         .arg(
             Arg::new("timeout")
                 .long("timeout")
                 .help("Metadata fetch timeout in milliseconds")
-                .takes_value(true)
+                .num_args(1)
                 .default_value("60000"),
         )
         .get_matches();
