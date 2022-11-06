@@ -16,7 +16,7 @@ jobs:
       - name: Install Protoc
         uses: arduino/setup-protoc@v1
       - name: Cache Dependencies
-        uses: Swatinem/rust-cache@v2.0.2
+        uses: Swatinem/rust-cache@v2.1.0
       - name: cargo check
         uses: actions-rs/cargo@v1
         with:
