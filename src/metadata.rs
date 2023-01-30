@@ -66,7 +66,7 @@ pub(crate) fn print_metadata(
             }
         }
         if fetch_offsets {
-            println!("     Total message count: {}", message_count);
+            println!("     Total message count: {message_count}");
         }
     }
 }

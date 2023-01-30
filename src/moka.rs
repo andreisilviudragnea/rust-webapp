@@ -6,7 +6,7 @@ pub(crate) async fn use_moka() {
     const NUM_KEYS_PER_TASK: usize = 64;
 
     fn value(n: usize) -> String {
-        format!("value {}", n)
+        format!("value {n}")
     }
 
     // Create a cache that can store up to 10,000 entries.
