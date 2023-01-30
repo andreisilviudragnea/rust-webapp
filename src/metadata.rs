@@ -57,9 +57,7 @@ pub(crate) fn print_metadata(
                     .fetch_watermarks(topic.name(), partition.id(), Duration::from_secs(1))
                     .unwrap_or((-1, -1));
                 println!(
-                    "       Low watermark: {}  High watermark: {} (difference: {})",
-                    low,
-                    high,
+                    "       Low watermark: {low}  High watermark: {high} (difference: {})",
                     high - low
                 );
                 message_count += high - low;
