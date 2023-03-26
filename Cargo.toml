@@ -26,4 +26,4 @@ moka = { version = "0.10.0", features = ["future"] }
 prost-build = "0.11.8"
 
 [dev-dependencies]
-mockall = "0.11.3"
+mockall = "0.11.4"
