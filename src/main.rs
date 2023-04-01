@@ -10,6 +10,7 @@ use crate::metadata::print_metadata;
 use crate::moka::use_moka;
 use crate::prost::{create_large_shirt, deserialize_shirt, serialize_shirt};
 
+mod axum;
 mod healthcheck;
 mod kubeclient;
 mod metadata;
@@ -19,6 +20,8 @@ mod prost;
 
 #[tokio::main]
 async fn main() -> Result<(), Error> {
+    axum::axum_main().await;
+
     SimpleLogger::new()
         .with_level(LevelFilter::Info)
         .init()
