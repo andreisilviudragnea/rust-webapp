@@ -1,11 +1,12 @@
 use async_trait::async_trait;
 use futures::TryStreamExt;
 use k8s_openapi::api::core::v1::ConfigMap;
-use kube::api::ListParams;
+
 use kube::error::Error;
 use kube::{Api, Client};
 use kube_runtime::reflector::store::Writer;
 use kube_runtime::reflector::Store;
+use kube_runtime::watcher::Config;
 use kube_runtime::{reflector, watcher, WatchStreamExt};
 use log::info;
 use tokio::task;
@@ -64,10 +65,7 @@ impl KubeClient for KubeClientImpl {
                 writer,
                 watcher(
                     config_maps_api,
-                    ListParams {
-                        label_selector: Some(label_selector_clone),
-                        ..ListParams::default()
-                    },
+                    Config::default().labels(&label_selector_clone),
                 ),
             )
             .applied_objects()
