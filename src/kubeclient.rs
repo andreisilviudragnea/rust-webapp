@@ -58,22 +58,16 @@ impl KubeClient for KubeClientImpl {
 
         let config_maps_api = self.config_maps_api.clone();
 
-        let label_selector_clone = label_selector.clone();
+        let watcher_config = Config::default().labels(&label_selector);
 
         task::spawn(async move {
-            reflector(
-                writer,
-                watcher(
-                    config_maps_api,
-                    Config::default().labels(&label_selector_clone),
-                ),
-            )
-            .applied_objects()
-            .try_for_each(|config_map| async {
-                callback(config_map);
-                Ok(())
-            })
-            .await
+            reflector(writer, watcher(config_maps_api, watcher_config))
+                .applied_objects()
+                .try_for_each(|config_map| async {
+                    callback(config_map);
+                    Ok(())
+                })
+                .await
         });
 
         info!(
