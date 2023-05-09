@@ -1,4 +1,3 @@
-use async_trait::async_trait;
 use futures::TryStreamExt;
 use k8s_openapi::api::core::v1::ConfigMap;
 
@@ -11,7 +10,6 @@ use kube_runtime::{reflector, watcher, WatchStreamExt};
 use log::info;
 use tokio::task;
 
-#[async_trait]
 pub(crate) trait KubeClient {
     async fn get_config_map(&self, name: &str) -> Result<ConfigMap, Error>;
 
@@ -36,7 +34,6 @@ impl KubeClientImpl {
     }
 }
 
-#[async_trait]
 impl KubeClient for KubeClientImpl {
     async fn get_config_map(&self, name: &str) -> Result<ConfigMap, Error> {
         self.config_maps_api.get(name).await
