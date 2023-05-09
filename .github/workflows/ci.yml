@@ -16,6 +16,8 @@ jobs:
           toolchain: nightly
           override: true
           components: rustfmt, clippy
+      - name: Install Protoc
+        uses: arduino/setup-protoc@v1
       - name: Cache Dependencies
         uses: Swatinem/rust-cache@v2.2.1
       - name: cargo fmt --all --check
