@@ -5,6 +5,7 @@ use std::time::Duration;
 use clap::{Arg, Command};
 use kube::Error;
 use log::{info, LevelFilter};
+use notify::{recommended_watcher, RecursiveMode, Watcher};
 use simple_logger::SimpleLogger;
 
 use crate::kubeclient::{KubeClient, KubeClientImpl};
@@ -22,12 +23,24 @@ mod prost;
 
 #[tokio::main]
 async fn main() -> Result<(), Error> {
-    axum::axum_main().await;
-
     SimpleLogger::new()
         .with_level(LevelFilter::Info)
+        .with_threads(true)
         .init()
         .unwrap();
+
+    let mut watcher = recommended_watcher(|event| {
+        info!("Received event {event:?}");
+    })
+    .unwrap();
+
+    watcher
+        .watch("Cargo.toml".as_ref(), RecursiveMode::Recursive)
+        .unwrap();
+
+    std::thread::sleep(Duration::from_secs(500));
+
+    axum::axum_main().await;
 
     let shirt = create_large_shirt("red".to_string());
 
