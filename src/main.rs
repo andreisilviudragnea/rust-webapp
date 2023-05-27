@@ -5,7 +5,8 @@ use std::time::Duration;
 use clap::{Arg, Command};
 use kube::Error;
 use log::{info, LevelFilter};
-use notify::{recommended_watcher, RecursiveMode, Watcher};
+use notify::event::ModifyKind;
+use notify::{recommended_watcher, Event, EventKind, RecursiveMode, Watcher};
 use simple_logger::SimpleLogger;
 
 use crate::kubeclient::{KubeClient, KubeClientImpl};
@@ -29,8 +30,12 @@ async fn main() -> Result<(), Error> {
         .init()
         .unwrap();
 
-    let mut watcher = recommended_watcher(|event| {
-        info!("Received event {event:?}");
+    let mut watcher = recommended_watcher(|event: notify::Result<Event>| match &event {
+        Ok(event) => match event.kind {
+            EventKind::Modify(ModifyKind::Data(_)) => info!("Modified file {event:?}"),
+            _ => info!("Received event {event:?}"),
+        },
+        _ => info!("Received error event {event:?}"),
     })
     .unwrap();
 
