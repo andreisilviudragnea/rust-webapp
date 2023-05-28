@@ -5,8 +5,7 @@ use std::time::Duration;
 use clap::{Arg, Command};
 use kube::Error;
 use log::{info, LevelFilter};
-use notify::event::ModifyKind;
-use notify::{recommended_watcher, Event, EventKind, RecursiveMode, Watcher};
+
 use simple_logger::SimpleLogger;
 
 use crate::kubeclient::{KubeClient, KubeClientImpl};
@@ -21,6 +20,7 @@ mod metadata;
 mod mockall;
 mod moka;
 mod prost;
+mod watch_file;
 
 #[tokio::main]
 async fn main() -> Result<(), Error> {
@@ -30,18 +30,7 @@ async fn main() -> Result<(), Error> {
         .init()
         .unwrap();
 
-    let mut watcher = recommended_watcher(|event: notify::Result<Event>| match &event {
-        Ok(event) => match event.kind {
-            EventKind::Modify(ModifyKind::Data(_)) => info!("Modified file {event:?}"),
-            _ => info!("Received event {event:?}"),
-        },
-        _ => info!("Received error event {event:?}"),
-    })
-    .unwrap();
-
-    watcher
-        .watch("Cargo.toml".as_ref(), RecursiveMode::Recursive)
-        .unwrap();
+    let _watcher = watch_file::watch_file_content();
 
     std::thread::sleep(Duration::from_secs(500));
 
