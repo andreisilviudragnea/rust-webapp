@@ -11,7 +11,7 @@ pub fn watch_file_content(path: &str) -> (RecommendedWatcher, Arc<RwLock<Arc<Str
     let file_content2 = file_content.clone();
     let path2 = path.to_string();
 
-    let mut watcher = recommended_watcher(move |event: notify::Result<Event>| match &event {
+    let mut watcher = recommended_watcher(move |event: notify::Result<Event>| match event {
         Ok(event) => match event.kind {
             EventKind::Modify(ModifyKind::Data(_)) => {
                 info!("Received modified file data event {event:?}");
