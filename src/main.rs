@@ -30,9 +30,19 @@ async fn main() -> Result<(), Error> {
         .init()
         .unwrap();
 
-    let _watcher = watch_file::watch_file_content();
+    let (_watcher, file_content) = watch_file::watch_file_content("Cargo.toml");
 
-    std::thread::sleep(Duration::from_secs(500));
+    let mut prev_content = file_content.read().unwrap().clone();
+    let mut n = 100_000;
+
+    while n > 0 {
+        let content = file_content.read().unwrap().clone();
+        if prev_content != content {
+            info!("Content changed {prev_content} {content}");
+        }
+        prev_content = content;
+        n -= 1;
+    }
 
     axum::axum_main().await;
 
