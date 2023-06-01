@@ -49,7 +49,7 @@ mod tests {
 
         assert_eq!(*file_content.read().unwrap().clone(), "");
 
-        writeln!(file, "123")?;
+        write!(file, "123")?;
 
         std::thread::sleep(Duration::from_secs(3));
 
