@@ -30,3 +30,31 @@ pub fn watch_file_content(path: &str) -> (RecommendedWatcher, Arc<RwLock<Arc<Str
 
     (watcher, file_content)
 }
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    use std::io::Write;
+    use std::time::Duration;
+    use tempfile::NamedTempFile;
+
+    #[test]
+    fn test() -> anyhow::Result<()> {
+        let mut file = NamedTempFile::new()?;
+
+        println!("{:?}", file.path());
+
+        let (_watcher, file_content) = watch_file_content(file.path().to_str().unwrap());
+
+        assert_eq!(*file_content.read().unwrap().clone(), "");
+
+        writeln!(file, "123")?;
+
+        std::thread::sleep(Duration::from_secs(3));
+
+        assert_eq!(*file_content.read().unwrap().clone(), "123");
+
+        Ok(())
+    }
+}
