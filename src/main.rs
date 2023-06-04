@@ -15,6 +15,8 @@ use crate::prost::{create_large_shirt, deserialize_shirt, serialize_shirt};
 
 mod axum;
 mod healthcheck;
+#[cfg(test)]
+mod inherent_trait_method;
 mod kubeclient;
 mod metadata;
 mod mockall;
