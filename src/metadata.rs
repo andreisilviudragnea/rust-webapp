@@ -68,3 +68,27 @@ pub(crate) fn print_metadata(
         }
     }
 }
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+    use log::LevelFilter;
+    use rdkafka::producer::ThreadedProducer;
+    use simple_logger::SimpleLogger;
+
+    #[test]
+    fn test_threaded_producer_statistics_interval_ms_race_condition() -> anyhow::Result<()> {
+        SimpleLogger::new()
+            .with_level(LevelFilter::Trace)
+            .with_threads(true)
+            .init()
+            .unwrap();
+
+        // statistics.interval.ms needs to be more than 100,
+        // because of https://github.com/fede1024/rust-rdkafka/blob/master/src/producer/base_producer.rs#L538
+        let _producer: ThreadedProducer<_> = ClientConfig::new()
+            .set("statistics.interval.ms", "10")
+            .create()?;
+        Ok(())
+    }
+}
