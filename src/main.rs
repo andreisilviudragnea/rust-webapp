@@ -1,4 +1,5 @@
 #![feature(async_fn_in_trait)]
+#![feature(trait_upcasting)]
 
 use std::time::Duration;
 
@@ -22,6 +23,8 @@ mod metadata;
 mod mockall;
 mod moka;
 mod prost;
+#[cfg(test)]
+mod variance;
 mod watch_file;
 
 #[tokio::main]
