@@ -10,6 +10,6 @@ impl B for C {}
 
 #[test]
 fn test() {
-    let mut c: Box<dyn B> = Box::new(C {});
-    let mut c: Box<dyn A> = c;
+    let c: Box<dyn B> = Box::new(C {});
+    let _c: Box<dyn A> = c;
 }
