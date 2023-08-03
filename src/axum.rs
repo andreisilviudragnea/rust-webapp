@@ -27,11 +27,13 @@ pub(crate) async fn axum_main() {
         .unwrap();
 }
 
+#[axum_macros::debug_handler]
 // basic handler that responds with a static string
 async fn root() -> &'static str {
     "Hello, World!"
 }
 
+#[axum_macros::debug_handler]
 async fn create_user(
     // this argument tells axum to parse the request body
     // as JSON into a `CreateUser` type
@@ -42,6 +44,10 @@ async fn create_user(
         id: 1337,
         username: payload.username,
     };
+
+    // let _rc = std::rc::Rc::new(());
+
+    root().await;
 
     // this will be converted into a JSON response
     // with a status code of `201 Created`

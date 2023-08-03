@@ -29,6 +29,8 @@ mod watch_file;
 
 #[tokio::main]
 async fn main() -> Result<(), Error> {
+    axum::axum_main().await;
+
     SimpleLogger::new()
         .with_level(LevelFilter::Info)
         .with_threads(true)
@@ -48,8 +50,6 @@ async fn main() -> Result<(), Error> {
         prev_content = content;
         n -= 1;
     }
-
-    axum::axum_main().await;
 
     let shirt = create_large_shirt("red".to_string());
 
