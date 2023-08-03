@@ -29,13 +29,13 @@ mod watch_file;
 
 #[tokio::main]
 async fn main() -> Result<(), Error> {
-    axum::axum_main().await;
-
     SimpleLogger::new()
-        .with_level(LevelFilter::Info)
+        .with_level(LevelFilter::Trace)
         .with_threads(true)
         .init()
         .unwrap();
+
+    axum::axum_main().await;
 
     let (_watcher, file_content) = watch_file::watch_file_content("Cargo.toml");
 

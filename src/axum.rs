@@ -1,19 +1,28 @@
+use std::net::SocketAddr;
+use std::time::Duration;
+
 use axum::{
     http::StatusCode,
     routing::{get, post},
     Json, Router,
 };
+use lazy_static::lazy_static;
 use serde::{Deserialize, Serialize};
-use std::net::SocketAddr;
+use tokio::runtime::Runtime;
+use tokio::task::block_in_place;
+use tracing::metadata::LevelFilter;
 
 pub(crate) async fn axum_main() {
     // initialize tracing
-    tracing_subscriber::fmt::init();
+    tracing_subscriber::fmt()
+        .with_max_level(LevelFilter::TRACE)
+        .finish();
 
     // build our application with a route
     let app = Router::new()
         // `GET /` goes to `root`
         .route("/", get(root))
+        .route("/hello", get(hello))
         // `POST /users` goes to `create_user`
         .route("/users", post(create_user));
 
@@ -27,9 +36,36 @@ pub(crate) async fn axum_main() {
         .unwrap();
 }
 
+lazy_static! {
+    pub static ref RT: Runtime = Runtime::new().unwrap();
+}
+
+pub fn block<Fu>(f: Fu) -> Fu::Output
+where
+    Fu: std::future::Future,
+{
+    match tokio::runtime::Handle::try_current() {
+        Ok(handle) => block_in_place(|| handle.block_on(f)),
+        Err(_) => RT.block_on(f),
+    }
+}
+
 #[axum_macros::debug_handler]
 // basic handler that responds with a static string
 async fn root() -> &'static str {
+    block(async {
+        tokio::time::sleep(Duration::from_secs(15)).await;
+    });
+    println!("there");
+    block(async {
+        tokio::time::sleep(Duration::from_secs(1)).await;
+    });
+    "Hello, World!"
+}
+
+#[axum_macros::debug_handler]
+// basic handler that responds with a static string
+async fn hello() -> &'static str {
     "Hello, World!"
 }
 
