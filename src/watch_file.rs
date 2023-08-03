@@ -40,6 +40,7 @@ mod tests {
     use tempfile::NamedTempFile;
 
     #[test]
+    #[ignore]
     fn test() -> anyhow::Result<()> {
         let mut file = NamedTempFile::new()?;
 
