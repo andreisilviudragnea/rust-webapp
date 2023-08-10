@@ -14,10 +14,6 @@ mod tests {
         x.foo(4)
     }
 
-    // fn call_with_four2(x: &impl MyTrait) -> u32 {
-    //     x.foo(4)
-    // }
-
     #[test]
     fn mytest() {
         let mut mock = MockMyTrait::new();
