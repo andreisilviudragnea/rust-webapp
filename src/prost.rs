@@ -18,8 +18,7 @@ pub fn create_large_shirt(color: String) -> items::Shirt {
 }
 
 pub fn serialize_shirt(shirt: &items::Shirt) -> Vec<u8> {
-    let mut buf = Vec::new();
-    buf.reserve(shirt.encoded_len());
+    let mut buf = Vec::with_capacity(shirt.encoded_len());
     // Unwrap is safe, since we have reserved sufficient capacity in the vector.
     shirt.encode(&mut buf).unwrap();
     buf
