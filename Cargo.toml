@@ -7,7 +7,7 @@ edition = "2021"
 
 [dependencies]
 chrono = "0.4.28"
-clap = "4.4.1"
+clap = "4.4.2"
 env_logger = "0.10.0"
 futures = "0.3.28"
 kube = "0.85.0"
