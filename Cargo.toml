@@ -7,9 +7,9 @@ edition = "2021"
 
 [dependencies]
 chrono = "0.4.31"
-clap = "4.4.6"
+clap = "4.4.7"
 env_logger = "0.10.0"
-futures = "0.3.28"
+futures = "0.3.29"
 kube = "0.86.0"
 kube-runtime = "0.86.0"
 k8s-openapi = { version = "0.20.0", default-features = false, features = ["latest"] }
@@ -21,8 +21,8 @@ rdkafka = { version = "0.34.0", features = ["cmake-build", "ssl"] }
 prost = "0.12.1"
 moka = { version = "0.12.1", features = ["future"] }
 axum = "0.6.20"
-serde = { version = "1.0.189", features = ["derive"] }
-tracing = "0.1.39"
+serde = { version = "1.0.190", features = ["derive"] }
+tracing = "0.1.40"
 tracing-subscriber = "0.3.17"
 notify = "6.1.1"
 tempfile = "3.8.0"
