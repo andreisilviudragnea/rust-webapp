@@ -25,6 +25,8 @@ mod mockall;
 mod moka;
 mod prost;
 #[cfg(test)]
+mod traits;
+#[cfg(test)]
 mod variance;
 mod watch_file;
 
