@@ -15,7 +15,9 @@ impl<'a> Database<'a> for Db<'a> {
 }
 
 #[derive(Serialize, Deserialize, PartialEq, Debug)]
+#[serde(bound = "B: Database<'a>")]
 struct Machine<'a, B: Database<'a>> {
+    parent: Option<Box<Self>>,
     #[serde(borrow)]
     buffer: Buffer<'a>,
     #[serde(skip)]
@@ -37,11 +39,12 @@ impl<'a, B: Database<'a>> Machine<'a, B> {
 fn test() {
     let str = "abc";
     let machine: Machine<Db> = Machine {
+        parent: None,
         buffer: Buffer { str },
         phantom: PhantomData,
     };
 
-    let serialized = "{\"buffer\":{\"str\":\"abc\"}}".to_string();
+    let serialized = "{\"parent\":null,\"buffer\":{\"str\":\"abc\"}}".to_string();
 
     assert_eq!(machine.serialize(), serialized);
 
