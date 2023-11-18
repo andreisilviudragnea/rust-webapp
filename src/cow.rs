@@ -33,6 +33,5 @@ fn test() {
         Cow::<str>::Owned("123".to_owned())
     );
 
-    let str = "123".to_owned();
-    use_str(&str);
+    use_str("123");
 }
