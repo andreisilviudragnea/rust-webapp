@@ -1,13 +1,13 @@
 use std::borrow::Cow;
 
 trait Storage<'a> {
-    fn get_code<'b>(&'b self) -> Cow<'a, str>;
+    fn get_code(&'a self) -> Cow<'a, str>;
 }
 
 struct OwnedStorage(String);
 
 impl<'a> Storage<'a> for OwnedStorage {
-    fn get_code<'b>(&'b self) -> Cow<'a, str> {
+    fn get_code(&'a self) -> Cow<'a, str> {
         Cow::Owned(self.0.clone())
     }
 }
@@ -15,9 +15,14 @@ impl<'a> Storage<'a> for OwnedStorage {
 struct BorrowedStorage<'a>(&'a str);
 
 impl<'a> Storage<'a> for BorrowedStorage<'a> {
-    fn get_code<'b>(&'b self) -> Cow<'a, str> {
+    fn get_code(&'a self) -> Cow<'a, str> {
         Cow::Borrowed(self.0)
     }
+}
+
+fn use_str(str: &str) {
+    let borrowed_storage = BorrowedStorage(str);
+    assert_eq!(borrowed_storage.get_code(), Cow::<str>::Borrowed(str));
 }
 
 #[test]
@@ -29,6 +34,5 @@ fn test() {
     );
 
     let str = "123".to_owned();
-    let borrowed_storage = BorrowedStorage(&str);
-    assert_eq!(borrowed_storage.get_code(), Cow::<str>::Borrowed(&str));
+    use_str(&str);
 }
