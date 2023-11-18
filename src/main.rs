@@ -15,6 +15,8 @@ use crate::prost::{create_large_shirt, deserialize_shirt, serialize_shirt};
 
 mod axum;
 #[cfg(test)]
+mod cow;
+#[cfg(test)]
 mod future;
 mod healthcheck;
 #[cfg(test)]
