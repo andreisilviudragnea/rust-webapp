@@ -20,6 +20,8 @@ mod cow;
 mod future;
 mod healthcheck;
 #[cfg(test)]
+mod higher_rank_trait_bounds;
+#[cfg(test)]
 mod inherent_trait_method;
 mod kubeclient;
 mod metadata;
