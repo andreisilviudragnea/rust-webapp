@@ -2,14 +2,14 @@ use serde::{Deserialize, Serialize};
 use std::marker::PhantomData;
 
 trait Database<'a> {
-    fn get_code(&self) -> Buffer<'a>;
+    fn get_code(&mut self) -> Buffer<'a>;
 }
 
 #[derive(PartialEq, Debug)]
 struct Db<'a>(&'a str);
 
 impl<'a> Database<'a> for Db<'a> {
-    fn get_code(&self) -> Buffer<'a> {
+    fn get_code(&mut self) -> Buffer<'a> {
         Buffer { str: self.0 }
     }
 }
@@ -19,7 +19,7 @@ struct Machine<'a, B: Database<'a>> {
     #[serde(borrow)]
     buffer: Buffer<'a>,
     #[serde(skip)]
-    phantom: PhantomData<B>,
+    phantom: PhantomData<*const B>,
 }
 
 #[derive(Serialize, Deserialize, PartialEq, Debug)]
