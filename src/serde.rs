@@ -27,6 +27,12 @@ struct Buffer<'a> {
     str: &'a str,
 }
 
+impl<'a, B: Database<'a>> Machine<'a, B> {
+    pub fn serialize(&self) -> String {
+        serde_json::to_string(self).unwrap()
+    }
+}
+
 #[test]
 fn test() {
     let str = "abc";
@@ -37,7 +43,7 @@ fn test() {
 
     let serialized = "{\"buffer\":{\"str\":\"abc\"}}".to_string();
 
-    assert_eq!(serde_json::to_string(&machine).unwrap(), serialized);
+    assert_eq!(machine.serialize(), serialized);
 
     let deserialized_machine = serde_json::from_str(&serialized).unwrap();
     assert_eq!(machine, deserialized_machine);
