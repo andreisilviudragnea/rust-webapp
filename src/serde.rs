@@ -1,9 +1,25 @@
 use serde::{Deserialize, Serialize};
+use std::marker::PhantomData;
+
+trait Database<'a> {
+    fn get_code(&self) -> Buffer<'a>;
+}
+
+#[derive(PartialEq, Debug)]
+struct Db<'a>(&'a str);
+
+impl<'a> Database<'a> for Db<'a> {
+    fn get_code(&self) -> Buffer<'a> {
+        Buffer { str: self.0 }
+    }
+}
 
 #[derive(Serialize, Deserialize, PartialEq, Debug)]
-struct Machine<'a> {
+struct Machine<'a, B: Database<'a>> {
     #[serde(borrow)]
     buffer: Buffer<'a>,
+    #[serde(skip)]
+    phantom: PhantomData<B>,
 }
 
 #[derive(Serialize, Deserialize, PartialEq, Debug)]
@@ -14,8 +30,9 @@ struct Buffer<'a> {
 #[test]
 fn test() {
     let str = "abc";
-    let machine = Machine {
+    let machine: Machine<Db> = Machine {
         buffer: Buffer { str },
+        phantom: PhantomData,
     };
 
     let serialized = "{\"buffer\":{\"str\":\"abc\"}}".to_string();
