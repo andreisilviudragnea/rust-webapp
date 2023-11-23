@@ -15,6 +15,8 @@ mod axum;
 #[cfg(test)]
 mod cow;
 #[cfg(test)]
+mod double_mut;
+#[cfg(test)]
 mod future;
 mod healthcheck;
 #[cfg(test)]
