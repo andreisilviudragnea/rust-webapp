@@ -1,4 +1,3 @@
-use std::net::SocketAddr;
 use std::time::Duration;
 
 use axum::{
@@ -28,12 +27,10 @@ pub(crate) async fn axum_main() {
 
     // run our app with hyper
     // `axum::Server` is a re-export of `hyper::Server`
-    let addr = SocketAddr::from(([127, 0, 0, 1], 3000));
-    tracing::debug!("listening on {}", addr);
-    axum::Server::bind(&addr)
-        .serve(app.into_make_service())
-        .await
-        .unwrap();
+    let addr = "127.0.0.1:3000";
+    let listener = tokio::net::TcpListener::bind(addr).await.unwrap();
+    tracing::debug!("listening on {:?}", addr);
+    axum::serve(listener, app).await.unwrap();
 }
 
 lazy_static! {
