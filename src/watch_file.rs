@@ -4,7 +4,9 @@ use notify::{recommended_watcher, Event, EventKind, RecommendedWatcher, Recursiv
 use std::sync::{Arc, RwLock};
 
 pub fn watch_file_content(path: &str) -> (RecommendedWatcher, Arc<RwLock<Arc<String>>>) {
-    let file_content = Arc::new(RwLock::new(Arc::new(std::fs::read_to_string(path).unwrap())));
+    let file_content = Arc::new(RwLock::new(Arc::new(
+        std::fs::read_to_string(path).unwrap(),
+    )));
 
     let file_content2 = file_content.clone();
     let path2 = path.to_string();
