@@ -15,6 +15,8 @@ mod axum;
 #[cfg(test)]
 mod cfg_type_parameter;
 #[cfg(test)]
+mod cfg_type_parameter_phantom_data;
+#[cfg(test)]
 mod cow;
 #[cfg(test)]
 mod double_mut;
