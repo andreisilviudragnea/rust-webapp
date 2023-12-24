@@ -31,9 +31,9 @@ mod prost;
 #[cfg(test)]
 mod serde;
 #[cfg(test)]
-mod traits;
+mod trait_upcast_coercion;
 #[cfg(test)]
-mod variance;
+mod traits;
 mod watch_file;
 
 #[tokio::main]
