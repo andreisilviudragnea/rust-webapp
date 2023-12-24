@@ -39,3 +39,7 @@ mockall = "0.12.1"
 
 [profile.release]
 debug = true
+
+[features]
+default = ["f"]
+f = []
