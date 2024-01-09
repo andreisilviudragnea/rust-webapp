@@ -19,7 +19,7 @@ tokio = { version = "1.35.1", features = ["full"] }
 warp = "0.3.6"
 rdkafka = { version = "0.36.0", features = ["cmake-build", "ssl"] }
 prost = "0.12.3"
-moka = { version = "0.12.2", features = ["future"] }
+moka = { version = "0.12.3", features = ["future"] }
 axum = "0.7.3"
 serde = { version = "1.0.195", features = ["derive"] }
 tracing = "0.1.40"
