@@ -1,3 +1,5 @@
+#![feature(trait_upcasting)]
+
 use std::time::Duration;
 
 use clap::{Arg, Command};
