@@ -33,6 +33,8 @@ mod kubeclient;
 mod metadata;
 mod mockall;
 mod moka;
+#[cfg(test)]
+mod mut_ref_vs_rc_refcell;
 mod prost;
 #[cfg(test)]
 mod serde;
