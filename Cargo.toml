@@ -12,7 +12,7 @@ env_logger = "0.11.1"
 futures = "0.3.30"
 kube = "0.87.2"
 kube-runtime = "0.87.2"
-k8s-openapi = { version = "0.20.0", default-features = false, features = ["latest"] }
+k8s-openapi = { version = "0.21.0", default-features = false, features = ["latest"] }
 log = "0.4.20"
 simple_logger = { version = "4.3.3", features = ["threads"] }
 tokio = { version = "1.35.1", features = ["full"] }
