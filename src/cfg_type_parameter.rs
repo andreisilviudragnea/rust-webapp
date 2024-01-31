@@ -35,7 +35,7 @@ impl<#[cfg(feature = "f")] T> s_type![T] {
 fn test() {
     let s = S {
         #[cfg(feature = "f")]
-        t: 0,
+        t: 5,
     };
 
     #[cfg(feature = "f")]
