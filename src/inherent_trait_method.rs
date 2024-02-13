@@ -6,6 +6,7 @@ impl A {
     }
 }
 
+#[allow(dead_code)]
 trait T {
     fn met(&self);
 }

@@ -1,10 +1,12 @@
 trait T {
     fn m(&self);
+    #[allow(dead_code)]
     fn n(&self);
 }
 
 trait S {
     fn m(&self);
+    #[allow(dead_code)]
     fn n(&self);
 }
 

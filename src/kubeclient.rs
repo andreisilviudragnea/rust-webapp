@@ -13,6 +13,7 @@ use tokio::task;
 pub(crate) trait KubeClient {
     async fn get_config_map(&self, name: &str) -> Result<ConfigMap, Error>;
 
+    #[allow(dead_code)]
     fn watch_config_map<T: Fn(ConfigMap) + Send + Sync + 'static>(
         &self,
         callback: T,

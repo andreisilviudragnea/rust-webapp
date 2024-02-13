@@ -2,6 +2,7 @@ use serde::{Deserialize, Serialize};
 use std::marker::PhantomData;
 
 trait Database<'a> {
+    #[allow(dead_code)]
     fn get_code(&mut self) -> Buffer<'a>;
 }
 
