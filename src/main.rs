@@ -31,6 +31,7 @@ mod higher_rank_trait_bounds;
 mod inherent_trait_method;
 mod kubeclient;
 mod metadata;
+#[cfg(test)]
 mod mockall;
 mod moka;
 #[cfg(test)]
