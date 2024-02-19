@@ -40,6 +40,8 @@ mod prost;
 #[cfg(test)]
 mod serde;
 #[cfg(test)]
+mod tokio_deadlock;
+#[cfg(test)]
 mod trait_upcast_coercion;
 #[cfg(test)]
 mod traits;
