@@ -40,6 +40,8 @@ mod moka;
 mod mut_ref_vs_rc_refcell;
 mod prost;
 #[cfg(test)]
+mod reborrow;
+#[cfg(test)]
 mod serde;
 #[cfg(test)]
 mod tokio_deadlock;
