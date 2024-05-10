@@ -38,6 +38,7 @@ fn test() {
     };
     let byte_1 = bytes.next();
     let byte_2 = bytes.next();
+    #[allow(clippy::drop_non_drop)]
     drop(bytes); // we can even drop the iterator now!
     assert_eq!(byte_1, byte_2);
 }

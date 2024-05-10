@@ -204,7 +204,7 @@ fn test8() {
     };
 
     let machine = &mut holder.machine;
-    let mut b = &mut holder.b;
+    let b = &mut holder.b;
 
-    machine.execute(&mut b);
+    machine.execute(b);
 }
