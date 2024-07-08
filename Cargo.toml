@@ -18,7 +18,7 @@ simple_logger = { version = "5.0.0", features = ["threads"] }
 tokio = { version = "1.38.0", features = ["full"] }
 warp = "0.3.7"
 rdkafka = { version = "0.36.2", features = ["cmake-build", "ssl"] }
-prost = "0.12.6"
+prost = "0.13.0"
 moka = { version = "0.12.7", features = ["future"] }
 axum = "0.7.5"
 serde = { version = "1.0.203", features = ["derive"] }
@@ -32,7 +32,7 @@ lazy_static = "1.4.0"
 serde_json = "1.0.117"
 
 [build-dependencies]
-prost-build = "0.12.6"
+prost-build = "0.13.0"
 
 [dev-dependencies]
 mockall = "0.12.1"
