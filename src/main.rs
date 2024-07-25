@@ -52,6 +52,8 @@ mod trait_upcast_coercion;
 #[cfg(test)]
 mod traits;
 mod watch_file;
+#[cfg(test)]
+mod lifetimes;
 
 #[tokio::main]
 async fn main() -> Result<(), Error> {
