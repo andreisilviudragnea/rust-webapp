@@ -16,7 +16,7 @@ k8s-openapi = { version = "0.22.0", default-features = false, features = ["lates
 log = "0.4.28"
 simple_logger = { version = "5.0.0", features = ["threads"] }
 tokio = { version = "1.47.1", features = ["full"] }
-warp = "0.3.7"
+warp = "0.4.0"
 rdkafka = { version = "0.37.0", features = ["cmake-build", "ssl"] }
 prost = "0.13.5"
 moka = { version = "0.12.11", features = ["future"] }
