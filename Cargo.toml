@@ -6,36 +6,36 @@ edition = "2021"
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
-chrono = "0.4.38"
-clap = "4.5.10"
-env_logger = "0.11.4"
-futures = "0.3.30"
-kube = "0.94.0"
-kube-runtime = "0.94.0"
+chrono = "0.4.42"
+clap = "4.5.48"
+env_logger = "0.11.8"
+futures = "0.3.31"
+kube = "0.94.2"
+kube-runtime = "0.94.2"
 k8s-openapi = { version = "0.22.0", default-features = false, features = ["latest"] }
-log = "0.4.22"
+log = "0.4.28"
 simple_logger = { version = "5.0.0", features = ["threads"] }
-tokio = { version = "1.39.1", features = ["full"] }
+tokio = { version = "1.47.1", features = ["full"] }
 warp = "0.3.7"
 rdkafka = { version = "0.37.0", features = ["cmake-build", "ssl"] }
-prost = "0.13.1"
-moka = { version = "0.12.8", features = ["future"] }
-axum = "0.8.0"
-serde = { version = "1.0.204", features = ["derive"] }
-tracing = "0.1.40"
-tracing-subscriber = "0.3.18"
-notify = "8.0.0"
-tempfile = "3.10.1"
-anyhow = "1.0.86"
+prost = "0.13.5"
+moka = { version = "0.12.11", features = ["future"] }
+axum = "0.8.4"
+serde = { version = "1.0.227", features = ["derive"] }
+tracing = "0.1.41"
+tracing-subscriber = "0.3.20"
+notify = "8.2.0"
+tempfile = "3.23.0"
+anyhow = "1.0.100"
 axum-macros = "0.5.0"
 lazy_static = "1.5.0"
-serde_json = "1.0.120"
+serde_json = "1.0.145"
 
 [build-dependencies]
-prost-build = "0.13.1"
+prost-build = "0.13.5"
 
 [dev-dependencies]
-mockall = "0.13.0"
+mockall = "0.13.1"
 
 [profile.release]
 debug = true
