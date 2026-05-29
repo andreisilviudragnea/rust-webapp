@@ -15,7 +15,7 @@ log = "0.4.28"
 simple_logger = { version = "5.0.0", features = ["threads"] }
 tokio = { version = "1.47.1", features = ["full"] }
 warp = { version = "0.4.2", features = ["server", "test"] }
-rdkafka = { version = "0.38.0", features = ["cmake-build", "ssl"] }
+rdkafka = { version = "0.39.0", features = ["cmake-build", "ssl"] }
 prost = "0.14.1"
 moka = { version = "0.12.11", features = ["future"] }
 axum = "0.8.4"
